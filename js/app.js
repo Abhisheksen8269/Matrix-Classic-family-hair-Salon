@@ -52,12 +52,14 @@ function renderServices(services) {
     if (!grid) return;
 
     const cardImages = [
-        'assets/photos/hair_styling_result.jpg',
+        'assets/photos/storefront_front.jpg',
         'assets/photos/hair_straightening_1.jpg',
         'assets/photos/hair_smoothing_2.jpg',
-        'assets/photos/special_offer_banner.jpg',
-        'assets/photos/storefront_front.jpg',
-        'assets/photos/hair_straightening_1.jpg'
+        'assets/photos/storefront_idfc.jpg',
+        'assets/photos/hair_styling_result.jpg',
+        'assets/photos/storefront_standee.jpg',
+        'assets/photos/storefront_wide.jpg',
+        'assets/photos/storefront_close.jpg'
     ];
 
     grid.innerHTML = services.map((service, idx) => {
