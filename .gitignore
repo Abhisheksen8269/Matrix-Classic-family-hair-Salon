@@ -1,0 +1,6 @@
+node_modules/
+*.log
+server.log
+server5000.log
+scratch/
+data/bookings.json
