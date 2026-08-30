@@ -146,23 +146,6 @@ function initBookingModal() {
         }
     });
 
-    // Dynamic Price Calculator
-    if (serviceSelect && priceDisplay) {
-        serviceSelect.addEventListener('change', () => {
-            const selectedVal = serviceSelect.value;
-            let priceText = '₹49';
-
-            if (selectedVal.includes('Smoothing')) priceText = '₹1,999';
-            else if (selectedVal.includes('Keratin')) priceText = '₹2,499';
-            else if (selectedVal.includes('Spa')) priceText = '₹399';
-            else if (selectedVal.includes('Facial')) priceText = '₹499';
-            else if (selectedVal.includes('Beard')) priceText = '₹149';
-            else if (selectedVal.includes('Bridal')) priceText = '₹2,999';
-
-            priceDisplay.textContent = priceText;
-        });
-    }
-
     // Submit Booking Form to Node API
     if (form) {
         form.addEventListener('submit', async (e) => {
@@ -174,7 +157,6 @@ function initBookingModal() {
             const service = document.getElementById('book-service').value;
             const date = document.getElementById('book-date').value;
             const time = document.getElementById('book-time').value;
-            const price = priceDisplay ? priceDisplay.textContent : '₹49';
 
             // Basic validation
             if (!name || !phone || !service || !date) {
@@ -182,7 +164,7 @@ function initBookingModal() {
                 return;
             }
 
-            const payload = { name, phone, gender, service, date, time, estimatedPrice: price };
+            const payload = { name, phone, gender, service, date, time };
 
             // Show loading state
             const submitBtn = form.querySelector('[type="submit"]');
@@ -208,7 +190,7 @@ function initBookingModal() {
                     showBookingSuccess(name, data.booking.id);
                 } else {
                     // Fallback: directly build WhatsApp message
-                    const waText = `Hello Matrix Classic Salon (Rahul)! 👋\n\n📌 Booking Request\n👤 Name: ${name}\n📞 Phone: ${phone}\n🚻 Type: ${gender}\n✂️ Service: ${service}\n📅 Date: ${date}\n⏰ Time: ${time}\n💰 Price Est: ${price}\n\nPlease confirm my appointment slot!`;
+                    const waText = `Hello Matrix Classic Salon (Rahul)! 👋\n\n📌 Booking Request\n👤 Name: ${name}\n📞 Phone: ${phone}\n🚻 Type: ${gender}\n✂️ Service: ${service}\n📅 Date: ${date}\n⏰ Time: ${time}\n\nPlease confirm my appointment slot!`;
                     window.open(`https://wa.me/918878340324?text=${encodeURIComponent(waText)}`, '_blank');
                     showBookingSuccess(name, 'WA-' + Date.now());
                 }
