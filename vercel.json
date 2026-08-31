@@ -14,7 +14,8 @@
           "assets/**",
           "data/**",
           "robots.txt",
-          "sitemap.xml"
+          "sitemap.xml",
+          "googlec24ee36e18028c7a.html"
         ]
       }
     }
