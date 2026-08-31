@@ -164,7 +164,7 @@ function writeJSONFile(filePath, data) {
 }
 
 // Request Handler
-const server = http.createServer((req, res) => {
+const requestHandler = (req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
     const method = req.method;
@@ -267,7 +267,8 @@ const server = http.createServer((req, res) => {
 
                 const waMessage = `Hello Matrix Classic Salon (Rahul)! 👋\n\nNew Salon Booking:\n\n📌 *Booking Ref:* ${newBooking.id}\n👤 *Client:* ${newBooking.name}\n📞 *Phone:* ${newBooking.phone}\n🚻 *Type:* ${newBooking.gender}\n✂️ *Service:* ${newBooking.service}\n📅 *Date:* ${newBooking.date}\n⏰ *Time:* ${newBooking.time}\n💈 *Stylist:* ${newBooking.stylist}\n💰 *Price Est:* ${newBooking.estimatedPrice}\n\nPlease confirm my slot!`;
 
-                const waUrl = `https://wa.me/918878340324?text=${encodeURIComponent(waMessage)}`;
+                const waNumber = process.env.WHATSAPP_NUMBER || '918878340324';
+                const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
 
                 return sendJSON(res, {
                     success: true,
@@ -304,7 +305,9 @@ const server = http.createServer((req, res) => {
         const stream = fs.createReadStream(filePath);
         stream.pipe(res);
     });
-});
+};
+
+const server = http.createServer(requestHandler);
 
 if (require.main === module) {
     server.listen(PORT, () => {
@@ -317,4 +320,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = server;
+module.exports = requestHandler;
