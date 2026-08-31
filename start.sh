@@ -8,4 +8,4 @@ echo "📞 Phone: 088783 40324"
 echo ""
 
 PORT=${PORT:-5000}
-node server.js
+node lib/server.js
