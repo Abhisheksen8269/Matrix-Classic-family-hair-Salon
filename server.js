@@ -320,4 +320,4 @@ if (require.main === module) {
     });
 }
 
-module.exports = requestHandler;
+module.exports = server;

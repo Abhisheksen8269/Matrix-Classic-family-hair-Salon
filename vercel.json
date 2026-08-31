@@ -1,13 +1,26 @@
 {
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "data/**"
-    }
-  },
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "src": "server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "index.html",
+          "css/**",
+          "js/**",
+          "photos/**",
+          "videos/**",
+          "assets/**",
+          "data/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
     }
   ]
 }

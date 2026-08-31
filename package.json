@@ -2,9 +2,10 @@
   "name": "matrix-salon-sehore",
   "version": "1.0.0",
   "description": "Full-Stack Node.js & React Web Application for Matrix Classic Family Unisex Salon Sehore",
+  "main": "server.js",
   "scripts": {
-    "start": "node lib/server.js",
-    "dev": "node lib/server.js",
+    "start": "node server.js",
+    "dev": "node server.js",
     "test": "node -e \"console.log('Server configuration valid!')\""
   },
   "keywords": [
