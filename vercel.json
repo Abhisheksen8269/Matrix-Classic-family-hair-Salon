@@ -12,7 +12,9 @@
           "photos/**",
           "videos/**",
           "assets/**",
-          "data/**"
+          "data/**",
+          "robots.txt",
+          "sitemap.xml"
         ]
       }
     }

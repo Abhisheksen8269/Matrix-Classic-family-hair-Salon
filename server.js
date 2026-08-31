@@ -41,7 +41,9 @@ const MIME_TYPES = {
     '.gif': 'image/gif',
     '.svg': 'image/svg+xml',
     '.mp4': 'video/mp4',
-    '.ico': 'image/x-icon'
+    '.ico': 'image/x-icon',
+    '.xml': 'application/xml; charset=UTF-8',
+    '.txt': 'text/plain; charset=UTF-8'
 };
 
 // Initial Services Data

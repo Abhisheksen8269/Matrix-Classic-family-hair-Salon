@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://matrix-classic-family-hair-salon.vercel.app/sitemap.xml
