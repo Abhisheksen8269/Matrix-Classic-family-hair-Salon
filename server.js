@@ -9,9 +9,25 @@ const path = require('path');
 const url = require('url');
 
 const PORT = process.env.PORT || 5000;
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'data');
 const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
 const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
+
+// Ensure data files are seeded into /tmp when running on Vercel
+if (process.env.VERCEL) {
+    const srcBookings = path.join(__dirname, 'data', 'bookings.json');
+    const srcReviews = path.join(__dirname, 'data', 'reviews.json');
+    try {
+        if (!fs.existsSync(BOOKINGS_FILE) && fs.existsSync(srcBookings)) {
+            fs.copyFileSync(srcBookings, BOOKINGS_FILE);
+        }
+        if (!fs.existsSync(REVIEWS_FILE) && fs.existsSync(srcReviews)) {
+            fs.copyFileSync(srcReviews, REVIEWS_FILE);
+        }
+    } catch (e) {
+        console.error('Error seeding data to /tmp:', e);
+    }
+}
 
 // MIME types mapping
 const MIME_TYPES = {
@@ -290,11 +306,15 @@ const server = http.createServer((req, res) => {
     });
 });
 
-server.listen(PORT, () => {
-    console.log(`=======================================================`);
-    console.log(`✂️ MATRIX CLASSIC SALON - NODE.JS FULL-STACK SERVER`);
-    console.log(`📍 Address: Englishpura Main Rd, near IDFC First Bank, Sehore`);
-    console.log(`📞 Phone: 088783 40324`);
-    console.log(`🌐 Server running at: http://localhost:${PORT}`);
-    console.log(`=======================================================`);
-});
+if (require.main === module) {
+    server.listen(PORT, () => {
+        console.log(`=======================================================`);
+        console.log(`✂️ MATRIX CLASSIC SALON - NODE.JS FULL-STACK SERVER`);
+        console.log(`📍 Address: Englishpura Main Rd, near IDFC First Bank, Sehore`);
+        console.log(`📞 Phone: 088783 40324`);
+        console.log(`🌐 Server running at: http://localhost:${PORT}`);
+        console.log(`=======================================================`);
+    });
+}
+
+module.exports = server;
